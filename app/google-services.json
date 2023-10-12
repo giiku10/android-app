@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "125217134278",
+    "firebase_url": "https://kan-sou-ki-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "kan-sou-ki",
+    "storage_bucket": "kan-sou-ki.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125217134278:android:00ddddb2a87c4ae48429c7",
+        "android_client_info": {
+          "package_name": "com.yakinikudoufu.kansouki"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCagiGBYYDuaqB-dL6nahadape3lUh6SII"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
