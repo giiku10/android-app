@@ -1,4 +1,4 @@
-package com.yakinikudoufu.myapplication
+package com.yakinikudoufu.kansouki
 
 import org.junit.Test
 

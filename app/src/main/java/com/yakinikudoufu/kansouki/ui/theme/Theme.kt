@@ -1,4 +1,4 @@
-package com.yakinikudoufu.myapplication.ui.theme
+package com.yakinikudoufu.kansouki.ui.theme
 
 import android.app.Activity
 import android.os.Build
