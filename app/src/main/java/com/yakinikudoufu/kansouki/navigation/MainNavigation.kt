@@ -43,6 +43,8 @@ fun MainNavigation() {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val navController = rememberNavController()
+    var homeFlg by rememberSaveable { mutableStateOf(true) }
+    var secondFlg by rememberSaveable { mutableStateOf(false) }
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -50,8 +52,6 @@ fun MainNavigation() {
             ModalDrawerSheet {
                 Text("Drawer title", modifier = Modifier.padding(16.dp))
                 Divider()
-                var homeFlg by rememberSaveable { mutableStateOf(true) }
-                var secondFlg by rememberSaveable { mutableStateOf(false) }
                 NavigationDrawerItem(
                     modifier = Modifier.padding(horizontal = 8.dp),
                     label = { Text(text = "home") },
@@ -103,14 +103,13 @@ fun MainNavigation() {
                         IconButton(onClick = {
                             scope.launch { drawerState.apply { if (isClosed) open() else close() } }
                         }) {
-                            Icon(
-                                imageVector = Icons.Filled.Menu,
-                                contentDescription = "Localized description"
-                            )
+                            Icon(imageVector = Icons.Filled.Menu,  contentDescription = "Localized description")
                         }
                     },
                     actions = {
                         IconButton(onClick = {
+                            homeFlg = false
+                            secondFlg = false
                             navController.navigate("settings")
                         }) {
                             Icon(imageVector = Icons.Filled.Settings, contentDescription = "Settings Button")
