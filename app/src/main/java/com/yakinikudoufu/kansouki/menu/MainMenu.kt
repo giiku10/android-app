@@ -35,11 +35,19 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainMenu(navController: NavController, content: @Composable (PaddingValues) -> Unit) {
+fun MainMenu(
+    navController: NavController,
+    isSelect: String,
+    content: @Composable (PaddingValues) -> Unit
+) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
-    var homeFlg by rememberSaveable { mutableStateOf(true) }
+    var homeFlg by rememberSaveable { mutableStateOf(false) }
     var secondFlg by rememberSaveable { mutableStateOf(false) }
+    when(isSelect){
+        "home" -> homeFlg = true
+        "second" -> secondFlg = true
+    }
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -61,8 +69,6 @@ fun MainMenu(navController: NavController, content: @Composable (PaddingValues) 
                     onClick = {
                         scope.launch { drawerState.apply { if (isClosed) open() else close() } }
                         navController.navigate("home")
-                        homeFlg = true
-                        secondFlg = false
                     }
                 )
                 NavigationDrawerItem(
@@ -79,8 +85,6 @@ fun MainMenu(navController: NavController, content: @Composable (PaddingValues) 
                     onClick = {
                         scope.launch { drawerState.apply { if (isClosed) open() else close() } }
                         navController.navigate("second")
-                        homeFlg = false
-                        secondFlg = true
                     }
                 )
             }

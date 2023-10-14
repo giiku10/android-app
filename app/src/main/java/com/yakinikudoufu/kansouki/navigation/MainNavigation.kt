@@ -13,22 +13,22 @@ import com.yakinikudoufu.kansouki.views.SettingView
 @Composable
 fun MainNavigation(){
     val navController = rememberNavController()
-    NavHost(
-        navController = navController,
-        startDestination = "home"
-    ) {
-        composable("home") {
-            MainMenu(navController = navController) {
-                MainView(paddingValues = it)
+        NavHost(
+            navController = navController,
+            startDestination = "home"
+        ) {
+            composable("home") {
+                MainMenu(navController = navController, isSelect = "home"){ paddingValue ->
+                    MainView(paddingValues = paddingValue)
+                }
+            }
+            composable("second") {
+                MainMenu(navController = navController, isSelect = "second"){ paddingValue ->
+                    SecondView(paddingValues = paddingValue)
+                }
+            }
+            composable("settings") {
+                SettingView(navController = navController)
             }
         }
-        composable("second") {
-            MainMenu(navController = navController) {
-                SecondView(paddingValues = it)
-            }
-        }
-        composable("settings") {
-            SettingView(navController = navController)
-        }
-    }
 }
