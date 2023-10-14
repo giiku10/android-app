@@ -6,11 +6,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import com.yakinikudoufu.kansouki.menu.BackButtonTitleBer
+import com.yakinikudoufu.kansouki.menu.TitleBer
 
 @Composable
 fun SettingView(navController: NavHostController) {
-    BackButtonTitleBer(navController) { paddingValue ->
+    TitleBer(isBack = true, navController = navController) { paddingValue ->
         Box(Modifier.padding(paddingValue)) {
             Text(text = "setting") //TODO アプリ設定画面
         }

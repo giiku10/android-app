@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">感想機</string>
     <string name="add_class">授業を追加</string>
+    <string name="add_parts">問題を追加</string>
+
+    <string name="show_less">Show less</string>
+    <string name="show_more">Show more</string>
+
 </resources>

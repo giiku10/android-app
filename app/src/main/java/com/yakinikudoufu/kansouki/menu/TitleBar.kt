@@ -17,7 +17,7 @@ import com.yakinikudoufu.kansouki.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BackButtonTitleBer(navController: NavController, content: @Composable (PaddingValues) -> Unit) {
+fun TitleBer(isBack:Boolean, navController: NavController, content: @Composable (PaddingValues) -> Unit) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -27,11 +27,14 @@ fun BackButtonTitleBer(navController: NavController, content: @Composable (Paddi
                     overflow = TextOverflow.Ellipsis
                 ) },
                 navigationIcon = {
-                    IconButton(onClick = {
-                        navController.navigateUp()
-                    }) {
-                        Icon(imageVector = Icons.Filled.ArrowBack,  contentDescription = "Localized description")
+                    if (isBack){
+                        IconButton(onClick = {
+                            navController.navigateUp()
+                        }) {
+                            Icon(imageVector = Icons.Filled.ArrowBack,  contentDescription = "Localized description")
+                        }
                     }
+
                 },
             )
         },
