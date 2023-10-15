@@ -136,24 +136,33 @@ fun AddClassDialog(
     onConfirmation: () -> Unit,
 ) {
     var className by remember { mutableStateOf("") }
+    var  errorText by remember { mutableStateOf("") }
     AlertDialog(
         properties = DialogProperties(dismissOnBackPress = true, dismissOnClickOutside = true),
         title = { Text(stringResource(R.string.add_class)) },
         text = {
             TextField(
                 value = className,
-                onValueChange = {className = it},
+                onValueChange = {className = it; errorText = ""},
                 label = { Text(text = "授業名")},
+                maxLines = 1,
+                singleLine = true,
+                isError = errorText.isNotBlank(),
+                supportingText = { Text(text = errorText)}
             )
         },
         onDismissRequest = { onDismissRequest() },
         confirmButton = {
             TextButton(
                 onClick = {
-                    val data = hashMapOf("name" to className)
-                    val db = Firebase.firestore
-                    db.collection("Class").add(data)
-                    onConfirmation()
+                    if (className != ""){
+                        val data = hashMapOf("name" to className)
+                        val db = Firebase.firestore
+                        db.collection("Class").add(data)
+                        onConfirmation()
+                    }else {
+                        errorText = "授業名を入力してください"
+                    }
                 }
             ) {
                 Text("作成")

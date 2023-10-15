@@ -243,6 +243,7 @@ fun AddPartsDialog(
     id: String
 ) {
     var partsName by remember { mutableStateOf("") }
+    var  errorText by remember { mutableStateOf("") }
     val radioOptions = listOf("問題群", "問題")
     val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[0]) }
     AlertDialog(
@@ -276,8 +277,12 @@ fun AddPartsDialog(
                 }
                 TextField(
                     value = partsName,
-                    onValueChange = {partsName = it},
+                    onValueChange = {partsName = it; errorText = ""},
                     label = { Text(text = "問題名")},
+                    maxLines = 1,
+                    singleLine = true,
+                    isError = errorText.isNotBlank(),
+                    supportingText = { Text(text = errorText)}
                 )
             }
         },
@@ -285,17 +290,22 @@ fun AddPartsDialog(
         confirmButton = {
             TextButton(
                 onClick = {
-                    val detail = if (selectedOption == "問題群") "folder" else "file"
-                    val data = hashMapOf(
-                        "check" to false,
-                        "detail" to detail,
-                        "difficulty" to emptyList<Int>(),
-                        "name" to partsName,
-                        "parent" to id,
-                    )
-                    val db = Firebase.firestore
-                    db.collection("Parts").add(data)
                     onConfirmation()
+                    if (partsName != ""){
+                        val detail = if (selectedOption == "問題群") "folder" else "file"
+                        val data = hashMapOf(
+                            "check" to false,
+                            "detail" to detail,
+                            "difficulty" to emptyList<Int>(),
+                            "name" to partsName,
+                            "parent" to id,
+                        )
+                        val db = Firebase.firestore
+                        db.collection("Parts").add(data)
+                        onConfirmation()
+                    }else {
+                        errorText = "授業名を入力してください"
+                    }
                 }
             ) {
                 Text("作成")
